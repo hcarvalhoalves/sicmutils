@@ -77,15 +77,26 @@
          (~attr k#)))))
 
 ;; Numeric functions.
-(def-generic-function add 2    {:name '+})
-(def-generic-function negate 1 {:name '-})
+(def-generic-function add 2
+  {:name '+
+   :dfdx (fn [_ _] 1)
+   :dfdy (fn [_ _] 1)})
+
+(def-generic-function negate 1
+  {:name '-
+   :dfdx (fn [_] -1)})
+
 (def-generic-function negative? 1
   "Returns true if the argument `a` is less than `(v/zero-like a), false
   otherwise. The default implementation depends on a proper Comparable
   implementation on the type.`")
 (defmethod negative? :default [a] (< a (v/zero-like a)))
 
-(def-generic-function sub 2 {:name '-})
+(def-generic-function sub 2
+  {:name '-
+   :dfdx (fn [_ _] 1)
+   :dfdy (fn [_ _] -1)})
+
 (defmethod sub :default [a b]
   (add a (negate b)))
 
