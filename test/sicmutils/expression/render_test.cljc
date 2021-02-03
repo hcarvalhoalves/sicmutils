@@ -183,6 +183,12 @@
   (is (= "4 \\geq 2 + 2 \\geq 1 + 3"
          (->TeX '(>= 4 (+ 2 2) (+ 1 3))))))
 
+(deftest symbols
+  (is (= "x" (->TeX 'x)))
+  (is (= "\\mathsf{PV}" (->TeX 'PV)))
+  (binding [sicmutils.expression.render/*TeX-sans-serif-symbols* false]
+    (is (= "{PV}" (->TeX 'PV)))))
+
 (defn ^:private make-symbol-generator
   [p]
   (let [i (atom 0)]
