@@ -2,9 +2,11 @@
 
 ## [Unreleased]
 
-=======
 - `sicmutils.expression.render/*TeX-sans-serif-symbols*` binding to control if
   symbols longer than 1 char should have `\mathsf` applied.
+
+- `sicmutils.expression.render/->infix` and `sicmutils.expression.render/->TeX` now
+  handle equality/inequality symbols (`=`, `>=`, `>`, ...) as infix.
 
 - `sicmutils.modint` gains more efficient implementations for `inverse`,
   `quotient`, `exact-divide` and `expt` on the JVM (#251).
